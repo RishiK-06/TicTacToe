@@ -12,7 +12,7 @@
 ---
 
 ### Files
-- `target_code.py` — main program
+- `main.py` — main program
 - `pngTicTacToe.excalidraw.png` — system diagram
 - `demoGif.gif` — demo video
 
@@ -20,7 +20,7 @@
 
 ### How to run:
 ```bash
-python target_code.py
+python main.py
 ```
 
 ---
