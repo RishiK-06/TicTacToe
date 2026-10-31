@@ -36,4 +36,3 @@ python main.py
 3. `print_board`
 4. `computer_move` (minimax)
 5. Main loop with score tracking and Q-quit
----
