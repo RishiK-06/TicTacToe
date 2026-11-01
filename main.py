@@ -79,3 +79,17 @@ def hard_computer_move(board):
             else:
                 best_score = min(best_score, result)
             return best_score
+        
+    best_move = None
+    best_value = -999
+
+    for position in get_empty_positions(board):
+        board[position] = "O"
+        value = minimax(False)
+
+        board[position] = position + 1
+
+        if value > best_value:
+            best_value = value
+            best_move = position
+    return best_move
