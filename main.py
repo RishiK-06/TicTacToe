@@ -1,3 +1,4 @@
+# TicTacToe program using minimax algorithm where "O" is computer and "X" is human.
 
 import random
 
@@ -8,13 +9,13 @@ score = {
     "draws": 0
 }
 
-# Get all empty positions available on the board
+# Get all empty positions available on the board - Sneha
 def get_empty_positions(board):
 
     # Check each cell and collect the indexes of empty positions
     return [i for i in range(9) if isinstance(board[i], int)]
 
-# Check whether the given player has won the game
+# Check whether the given player has won the game - Sneha
 def check_win(board, symbol):
 
     # Store all possible winning combinations (rows, columns and diagonals)
@@ -30,7 +31,7 @@ def check_win(board, symbol):
             return True  # Player has won
     return False  # No winning combination found
 
-# Display the Tic-Tac-Toe board in a 3x3 format
+# Display the Tic-Tac-Toe board in a 3x3 format - Sneha
 def print_board(board):
 
     # Loop through each row of the board
@@ -43,8 +44,38 @@ def print_board(board):
         if row < 2:
             print("--+---+--")
 
-# Easy difficulty
+# Easy difficulty - Sneha
 def easy_computer_move(board):
     empty_positions = get_empty_positions(board)
     return random.choice(empty_positions)
 
+# Hard difficulty - Rishi
+def hard_computer_move(board):
+    def minimax(is_computer_turn):
+        if check_win(board, "O"): # Computer has won
+            return 1
+        if check_win(board, "X"): # Human won
+            return -1
+        if not get_empty_positions(board): # In python empty list returns false not reverses it and returns Draw
+            return 0
+
+        if is_computer_turn:
+            best_score = -999 # simply initalizing best score assuming human will play the best move to minimize our score
+        else:
+            best_score = 999 # expecting human will try to maximize their score
+
+        for position in get_empty_positions(board):
+            if is_computer_turn:
+                board[position] = "O"
+            else:
+                board[position] = "X"
+
+            result = minimax(not is_computer_turn)
+
+            board[position] = position + 1
+
+            if is_computer_turn:
+                best_score = max(best_score, result)
+            else:
+                best_score = min(best_score, result)
+            return best_score

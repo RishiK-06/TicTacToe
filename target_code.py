@@ -41,104 +41,155 @@ def print_board(board):
         if row < 2:
             print("--+--+--")
 
+# Hard Mode: Minimax AI
+def hard_computer_move(board):
 
-def computer_move(board):
-    def minimax_score(is_computer_turn):
-        """Recursively score board states."""
-        if check_win(board, "O"):   # Computer win
+    def minimax(is_computer_turn):
+
+        if check_win(board, "O"):
             return 1
-        if check_win(board, "X"):   # Human win
+
+        if check_win(board, "X"):
             return -1
-        if not get_empty_positions(board):  # No moves left
+
+        if not get_empty_positions(board):
             return 0
 
         if is_computer_turn:
             best_score = -999
         else:
             best_score = 999
+
         for position in get_empty_positions(board):
-            # Simulate placing symbol
+
             if is_computer_turn:
                 board[position] = "O"
             else:
                 board[position] = "X"
-            score_value = minimax_score(not is_computer_turn)
-            # Undo simulation (restore number)
+
+            result = minimax(not is_computer_turn)
+
             board[position] = position + 1
-            # Computer wants max; human wants min
+
             if is_computer_turn:
-                best_score = max(best_score, score_value)
+                best_score = max(best_score, result)
             else:
-                best_score = min(best_score, score_value)
+                best_score = min(best_score, result)
         return best_score
 
     best_move = None
     best_value = -999
+
     for position in get_empty_positions(board):
+
         board[position] = "O"
-        value = minimax_score(False)  # Next turn is human
+
+        value = minimax(False)
+
         board[position] = position + 1
+
         if value > best_value:
             best_value = value
             best_move = position
     return best_move
 
+    # Main game
+def main():
 
-# Main game loop: play forever until user quits with Q
-while True:
-    # Fresh board for each match
-    board = list(range(1, 10))
+    print("===== TIC TAC TOE =====")
+    print("Player: X")
+    print("Computer: O")
 
-    # Inner loop: one full game until win/draw
+    # Difficulty selection
     while True:
-        print_board(board)
+        print("\nSelect Difficulty:")
+        print("1. Easy")
+        print("2. Hard")
 
-        # Human turn
-        try:
-            human_input = int(input("You are X. Pick 1-9: "))
-        except Exception:
-            continue
-        human_index = human_input - 1
+        choice = input("Enter your choice (1/2): ")
 
-        # Validate
-        if human_index not in get_empty_positions(board):
-            print("Invalid move. Try again.")
-            continue
-
-        # Apply X
-        board[human_index] = "X"
-        if check_win(board, "X"):
-            print_board(board)
-            print("You win!")
-            score["human_wins"] += 1
-            break
-        if not get_empty_positions(board):
-            print_board(board)
-            print("Draw!")
-            score["draws"] += 1
+        if choice in ["1", "2"]:
             break
 
-        # Computer turn (Hard/Minimax)
-        computer_index = computer_move(board)
-        board[computer_index] = "O"
-        if check_win(board, "O"):
+        print("Invalid choice. Please select 1 or 2.")
+
+    if choice == "1":
+        print("\nEasy Mode Selected!")
+    else:
+        print("\nHard Mode Selected!")
+
+    # Replay loop
+    while True:
+
+        board = list(range(1, 10))
+
+        # Game loop
+        while True:
+
             print_board(board)
-            print("Computer wins!")
-            score["computer_wins"] += 1
-            break
-        if not get_empty_positions(board):
-            print_board(board)
-            print("Draw!")
-            score["draws"] += 1
+
+            # Human turn
+            try:
+                human_input = int(input("Choose a position (1-9): "))
+            except ValueError:
+                print("Please enter a number.")
+                continue
+
+            human_index = human_input - 1
+
+            if human_index not in get_empty_positions(board):
+                print("Invalid position. Try again.")
+                continue
+
+            board[human_index] = "X"
+
+            if check_win(board, "X"):
+                print_board(board)
+                print("Congratulations! You win!")
+                score["human_wins"] += 1
+                break
+
+            if not get_empty_positions(board):
+                print_board(board)
+                print("It's a Draw!")
+                score["draws"] += 1
+                break
+
+            # Computer turn
+            if choice == "1":
+                computer_index = easy_computer_move(board)
+            else:
+                computer_index = hard_computer_move(board)
+
+            board[computer_index] = "O"
+
+            print("\nComputer played:")
+            
+            if check_win(board, "O"):
+                print_board(board)
+                print("Computer Wins!")
+                score["computer_wins"] += 1
+                break
+
+            if not get_empty_positions(board):
+                print_board(board)
+                print("It's a Draw!")
+                score["draws"] += 1
+                break
+
+        # Display score
+        print("\n===== SCOREBOARD =====")
+        print("Your Wins:", score["human_wins"])
+        print("Computer Wins:", score["computer_wins"])
+        print("Draws:", score["draws"])
+
+        again = input("\nPlay Again? (Y/N): ").strip().lower()
+
+        if again != "y":
+            print("Thanks for playing!")
             break
 
-    # Score and replay
-    print("\n=== SCORE ===")
-    print(f"You (X): {score['human_wins']}")
-    print(f"Computer (O): {score['computer_wins']}")
-    print(f"Draws: {score['draws']}")
-    print()
-    again = input("Play again? (Q to quit): ").strip().lower()
-    if again == "q" or again == "quit":
-        print("Goodbye.")
-        break
+
+# Program execution
+if __name__ == "__main__":
+    main()
