@@ -41,7 +41,7 @@ def print_board(board):
     for row in range(3):
 
         # Display three cells in the current row
-        print(" | ".join(str(cell) for cell in board[row*3:row*3+3]))
+        print(" | ".join(str(cell) for cell in board[row*3:(row+1) *3]))
 
         # Print separator between rows
         if row < 2:
