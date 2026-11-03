@@ -32,7 +32,7 @@ Step 3:
 python main.py
 ```
 
-![Alt text](demoGif.gif)
+![Demo video](demoGif.gif)
 
 ---
 ### Methods used
