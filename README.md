@@ -20,6 +20,10 @@
 
 ### How to run:
 ```bash
+git clone https://github.com/RishiK-06/TicTacToe.git
+```
+
+```bash
 python main.py
 ```
 
