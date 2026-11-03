@@ -19,13 +19,16 @@
 ---
 
 ### How to run:
-Step 1:```bash
+Step 1:
+```bash
 git clone https://github.com/RishiK-06/TicTacToe.git
 ```
-Step 2:```bash
+Step 2:
+```bash
 cd Downloads/TicTacToe
 ```
-Step 3:```bash
+Step 3:
+```bash
 python main.py
 ```
 
