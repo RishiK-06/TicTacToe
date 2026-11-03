@@ -1,4 +1,4 @@
-## Python Tic-Tac-Toe (Hard AI - MiniMax)
+## Python Tic-Tac-Toe
 
 ### What it does
 - 2-player terminal game: You play **X**, Computer plays **O**.
