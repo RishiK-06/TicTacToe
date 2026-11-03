@@ -23,14 +23,10 @@
 python main.py
 ```
 
----
-
-### Demo Video:
-
 ![Alt text](demoGif.gif)
 
 ---
-### Method order (predecessor-wise)
+### Methods used
 1. `get_empty_positions`
 2. `check_win`
 3. `print_board`
