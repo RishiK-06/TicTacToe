@@ -38,59 +38,16 @@ Run it:
 python main.py
 ```
 
-You'll see a board numbered 1–9:
-```
-1 | 2 | 3
---+--+--
-4 | 5 | 6
---+--+--
-7 | 8 | 9
-```
-
-- Type a number (1–9) and press **Enter** to place your **X**
-- Invalid input or taken squares are ignored — just try again
-- After your move, the computer instantly replies with **O**
-- Game ends when someone gets three in a row, or the board fills (draw)
-- Score is printed, then you're asked: `Play again? (Q to quit):`
-- Press **Enter** to play another round, or type **Q** / **quit** to exit
-
 ---
 
-## Files
+### Demo Video:
 
-| File | Purpose |
-|------|---------|
-| `main.py` | Game logic, Minimax AI, score loop |
-| `pngTicTacToe.excalidraw.png` | System diagram (open in Excalidraw or view directly) |
-| `demoGif.gif` | Short demo of gameplay |
+![Alt text](demoGif.gif)
 
 ---
-
-## Methods used
-
-1. `get_empty_positions(board)` — returns list of open indices
-2. `check_win(board, symbol)` — checks all 8 win lines
-3. `print_board(board)` — renders the 3×3 grid
-4. `computer_move(board)` — runs Minimax, returns best index
-5. Main loop — handles input, updates board, checks win/draw, tracks score, asks to replay
-
----
-
-## System Diagram
-
-![System Diagram](pngTicTacToe.excalidraw.png)
-
----
-
-## Demo
-
-![Demo](demoGif.gif)
-
----
-
-## Contributors
-
-| Contributor | Role |
-|-------------|------|
-| [@Rishi](https://github.com/Rishi) | Minimax implementation, README, demo, system design |
-| [@Sneha](https://github.com/Sneha-DSA) | Main method, display board function, check_win, easy difficulty  |
+### Method order (predecessor-wise)
+1. `get_empty_positions`
+2. `check_win`
+3. `print_board`
+4. `computer_move` (minimax)
+5. Main loop with score tracking and Q-quit
