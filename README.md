@@ -13,7 +13,7 @@ A small terminal game where you play **X** against a computer **O**. It tracks y
 
 ---
 
-## How the AI works (Minimax, in plain English)
+## How Minimax algorithm works
 
 It simulates every possible future move from the current board:
 
