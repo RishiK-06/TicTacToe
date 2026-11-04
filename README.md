@@ -1,38 +1,96 @@
-## Python Tic-Tac-Toe (Hard AI - MiniMax)
+# Python Tic-Tac-Toe
 
-### What it does
-- 2-player terminal game: You play **X**, Computer plays **O**.
-- AI uses **Minimax** (unbeatable).
-- Tracks wins / losses / draws and loops until you press **Q**.
+A small terminal game where you play **X** against a computer **O**. It tracks your score across rounds and keeps going until you quit with **Q**.
+
 ---
-### System Diagram:
+
+## What it does
+
+- **You vs. Computer** — Human is X, AI is O
+- **Hard AI** — Uses the Minimax algorithm
+- **Score tracking** — Wins, losses, and draws persist across rounds
+- **Play forever** — Enter `Q` at the prompt to exit
+
+---
+
+## How the Minimax works
+
+it simulates every possible future move from the current board status:
+
+1. **Look at all empty squares**
+2. **Try each one** — temporarily place an **O** there
+3. **Recurse** — gives the turn to users and thinks user will play his best option
+4. **Keep going** until the game ends (win, loss, or draw)
+5. **Score the outcome**  
+   - Computer wins → `+1`  
+   - You win → `-1`  
+   - Draw → `0`
+6. **Backtrack** — the computer picks the move that leads to the highest score (assuming you also play your best moves to minimize its score)
+
+Because the game tree for tic-tac-toe is tiny, this runs instantly. The result: the AI never looses.
+
+---
+
+## How to play
+
+Run it:
+```bash
+python main.py
+```
+
+You'll see a board numbered 1–9:
+```
+1 | 2 | 3
+--+--+--
+4 | 5 | 6
+--+--+--
+7 | 8 | 9
+```
+
+- Type a number (1–9) and press **Enter** to place your **X**
+- Invalid input or taken squares are ignored — just try again
+- After your move, the computer instantly replies with **O**
+- Game ends when someone gets three in a row, or the board fills (draw)
+- Score is printed, then you're asked: `Play again? (Q to quit):`
+- Press **Enter** to play another round, or type **Q** / **quit** to exit
+
+---
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `main.py` | Game logic, Minimax AI, score loop |
+| `pngTicTacToe.excalidraw.png` | System diagram (open in Excalidraw or view directly) |
+| `demoGif.gif` | Short demo of gameplay |
+
+---
+
+## Methods used
+
+1. `get_empty_positions(board)` — returns list of open indices
+2. `check_win(board, symbol)` — checks all 8 win lines
+3. `print_board(board)` — renders the 3×3 grid
+4. `computer_move(board)` — runs Minimax, returns best index
+5. Main loop — handles input, updates board, checks win/draw, tracks score, asks to replay
+
+---
+
+## System Diagram
 
 ![System Diagram](pngTicTacToe.excalidraw.png)
 
 ---
 
-### Files
-- `main.py` — main program
-- `pngTicTacToe.excalidraw.png` — system diagram
-- `demoGif.gif` — demo video
+## Demo
+
+![Demo](demoGif.gif)
 
 ---
 
-### How to run:
-```bash
-python main.py
-```
+## Contributors
 
----
-
-### Demo Video:
-
-![Alt text](demoGif.gif)
-
----
-### Method order (predecessor-wise)
-1. `get_empty_positions`
-2. `check_win`
-3. `print_board`
-4. `computer_move` (minimax)
-5. Main loop with score tracking and Q-quit
+| Contributor | Role |
+|-------------|------|
+| [@Rishi](https://github.com/Rishi) | Minimax implementation, README, demo, system design |
+| [@Sneha](https://github.com/Sneha-DSA) | Main method, display board function, check_win, easy difficulty  |
