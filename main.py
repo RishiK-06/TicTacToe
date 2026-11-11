@@ -78,7 +78,7 @@ def hard_computer_move(board):
                 best_score = max(best_score, result)
             else:
                 best_score = min(best_score, result)
-            return best_score
+        return best_score
         
     best_move = None
     best_value = -999
@@ -93,3 +93,102 @@ def hard_computer_move(board):
             best_value = value
             best_move = position
     return best_move
+
+    # Main game
+def main():
+
+    print("===== TIC TAC TOE =====") # art work
+    print("Player: X")
+    print("Computer: O")
+
+    # Replay loop (outer)
+    while True:
+
+        # Difficulty selection (inner loop)
+        while True:
+            print("\nSelect Difficulty:")
+            print("1. Easy")
+            print("2. Hard")
+
+            choice = input("Enter your choice (1/2): ")
+
+            if choice in ["1", "2"]: # checking if choice is 1 and 2 as a string if not break
+                break
+            print("Invalid choice. Please select 1 or 2.")
+
+        if choice == "1":
+            print("\nEasy Mode Selected!")
+        else:
+            print("\nHard Mode Selected!")
+
+        board = list(range(1, 10))
+
+        # Game loop (main loop)
+        while True:
+
+            print_board(board)
+
+            # Human turn
+            try:
+                human_input = int(input("Choose a position (1-9): "))
+            except ValueError:
+                print("Please enter a number.")
+                continue
+
+            human_index = human_input - 1 # index in list is -1 because index starts from 0 and we take input from 1-9
+
+            if human_index not in get_empty_positions(board):
+                print("Invalid position. Try again.")
+                continue
+
+            board[human_index] = "X"
+
+            if check_win(board, "X"):
+                print_board(board)
+                print("Congratulations! You win!")
+                score["human_wins"] += 1
+                break
+
+            if not get_empty_positions(board):
+                print_board(board)
+                print("It's a Draw!")
+                score["draws"] += 1
+                break
+
+            # Computer turn
+            if choice == "1":
+                computer_index = easy_computer_move(board)
+            else:
+                computer_index = hard_computer_move(board)
+
+            board[computer_index] = "O"
+
+            print("\nComputer played:")
+            
+            if check_win(board, "O"):
+                print_board(board)
+                print("Computer Wins!")
+                score["computer_wins"] += 1
+                break
+
+            if not get_empty_positions(board):
+                print_board(board)
+                print("It's a Draw!")
+                score["draws"] += 1
+                break
+
+        # Display score
+        print("\n===== SCOREBOARD =====")
+        print("Your Wins:", score["human_wins"])
+        print("Computer Wins:", score["computer_wins"])
+        print("Draws:", score["draws"])
+
+        again = input("\nPlay Again? (Y/N): ").strip().lower() # strip removes blank spaces if any
+
+        if again != "y":
+            print("Thanks for playing!")
+            break
+
+# Program execution
+if __name__ == "__main__":
+    main()
