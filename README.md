@@ -71,7 +71,8 @@ You'll see a board numbered 1–9:
 1. `get_empty_positions(board)` — returns list of open indices
 2. `check_win(board, symbol)` — checks all 8 win lines
 3. `print_board(board)` — renders the 3×3 grid
-4. `computer_move(board)` — runs Minimax, returns best index
+4. `easy_computer_move(board)` — easy mode where user can play to win using random module
+6. `hard_computer_move(board)` — hard mode using minimax algorithm which checks every possible future outcome before making a move
 5. Main loop — handles input, updates board, checks win/draw, tracks score, asks to replay
 
 ---
@@ -92,6 +93,6 @@ You'll see a board numbered 1–9:
 
 | Contributor | Role |
 |-------------|------|
-| [@Rishi](https://github.com/Rishi) | Minimax algorithm, README, Demo, System design |
-| [@Sneha](https://github.com/Sneha-DSA) | Main method, CheckWin function, PrintBoard function, Random difficulty |
+| [@Rishi](https://github.com/Rishi) | Minimax algorithm, README, Demo, System design, Main method |
+| [@Sneha](https://github.com/Sneha-DSA) | CheckWin function, PrintBoard function, Random difficulty |
 
